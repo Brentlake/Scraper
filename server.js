@@ -32,6 +32,7 @@ console.log(mynum)
 app.use(bodyParser.urlencoded({
   extended: false
 }));
+mongoose.connect()
 
 // Make public a static dir
 app.use(express.static("public"));
