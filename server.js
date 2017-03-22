@@ -11,6 +11,22 @@ mongoose.Promise = Promise;
 // Initialize Express
 var app = express();
 
+function generateUrls(limit) {
+  var url = 'http://localyellowpages.com/listing/';
+  var urls = [];
+  var i;
+  for (i=1; i < limit; i++) {
+    urls.push(url + i);
+  }
+  return urls;
+}
+
+
+var html = '<div><ul><li>1</li><li id="mynum">2</li><li>3</li></ul></div>';
+var $ = cheerio.load(html);
+// get my number
+var mynum = $('#notes').text();
+console.log(mynum)
 // Use morgan and body parser with our app
 
 app.use(bodyParser.urlencoded({

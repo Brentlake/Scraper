@@ -1,29 +1,17 @@
-// Require mongoose
-var mongoose = require("mongoose");
-// Create Schema class
-var Schema = mongoose.Schema;
-
-// Create article schema
-var ArticleSchema = new Schema({
-  // title is a required string
-  title: {
-    type: String,
-    required: true
-  },
-  // link is a required string
-  link: {
-    type: String,
-    required: true
-  },
-  // This only saves one note's ObjectId, ref refers to the Note model
-  note: {
-    type: Schema.Types.ObjectId,
-    ref: "Note"
-  }
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/mongoscraper');
+mongoose.connection.on('error', function() {
+  console.error('MongoDB Connection Error. Make sure MongoDB is running.');
 });
-
-// Create the Article model with the ArticleSchema
-var Article = mongoose.model("Article", ArticleSchema);
-
-// Export the model
-module.exports = Article;
+var ListingsSchema = new mongoose.Schema({
+  title: String,
+  email: {type: String, lowercase: true},
+  cell: Array,
+  telephone: Array,
+  fax: Array,
+  website: {type: String, default: '', lowercase: true},
+  postalAddress: Array,
+  address: Array,
+  url: String
+});
+module.exports = mongoose.model('Listings', ListingsSchema);
